@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Drum Kit</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+</head>
+
+<body>
+
+  <h1 id="title">Drum 🥁 Kit</h1>
+  <div class="set">
+    <button class="w drum"><img class="img1" src="images/tom1.png">w</button>
+    <button class="a drum"><img class="img2" src="images/tom2.png">a</button>
+    <button class="s drum"><img class="img3" src="images/tom3.png">s</button>
+    <button class="d drum"><img class="img4" src="images/tom4.png">d</button>
+    <button class="j drum"><img class="img5" src="images/crash.png">j</button>
+    <button class="k drum"><img class="img6" src="images/snare.png">k</button>
+    <button class="l drum"><img class="img7" src="images/kick.png">l</button>
+  </div>
+
+  <footer>
+    Made with ❤️ in London.
+  </footer>
+
+  <script>
+        /* var audio = function(fileLocation) { this is the built function for the audio
+          this.fileLocation = fileLocation;
+          this.audio = new Audio(fileLocation); we will use inbuilt Audio function
+          this.play = function() {
+            this.audio.play();
+          }
+        } */
+    document.addEventListener("DOMContentLoaded", function() { // To ensure that the script runs after the DOM being fully-loaded
+      for (let i = 0; i < document.querySelectorAll(".drum").length; i++) {
+        document.querySelectorAll(".drum")[i].addEventListener("click", function handleClick() {
+
+          // this.style.color = "white"; this will change the color of the button pressed to white
+
+          let buttonInnerHTML = this.textContent.trim(); // we used texContent.trim() to get the exact text content without any white spaces
+          
+          makeSound(buttonInnerHTML);
+          buttonAnimation(buttonInnerHTML);
+        });
+      }
+    });
+
+    document.addEventListener("keypress", function(event) { //select the entire document for this eventListener for keypress
+      //console.log(event);
+      //alert("key is pressed");
+
+      makeSound(event.key);
+      buttonAnimation(event.key);
+    });
+
+    function makeSound(key) {
+      switch (key) {
+            case "w":
+              // alert("W got clicked");
+              var audioW = new Audio('sounds/tom-1.mp3');
+              audioW.play();
+              break;
+            case "a":
+              // alert("A got clicked");
+              var audioA = new Audio('sounds/tom-2.mp3');
+              audioA.play();
+              break;
+            case "s":
+              // alert("S got clicked");
+              var audioS = new Audio('sounds/tom-3.mp3');
+              audioS.play();
+              break;
+            case "d":
+              // alert("D got clicked");
+              var audioD = new Audio('sounds/tom-4.mp3');
+              audioD.play();
+              break;
+            case "j":
+              // alert("J got clicked");
+              var audioJ = new Audio('sounds/crash.mp3');
+              audioJ.play();
+              break;
+            case "k":
+              // alert("K got clicked");
+              var audioK = new Audio('sounds/snare.mp3');
+              audioK.play();
+              break;
+            case "l":
+              // alert("L got clicked");
+              var audioL = new Audio('sounds/kick-bass.mp3');
+              audioL.play();
+              break;
+            default:
+              console.log(buttonInnerHTML);
+          }
+    }
+
+    function buttonAnimation(currentKey) {
+      var activeButton = document.querySelector("." + currentKey);
+      if (activeButton) {
+        activeButton.classList.add("pressed");
+
+        setTimeout(function() {
+          activeButton.classList.remove("pressed");
+        }, 100);
+      }
+    }
+
+
+    // var i = document.querySelectorAll(".drum")[i].addEventListener("click", handleClick);
+
+    // function handleClick() {
+    //   alert("W got Clicked");
+    // }
+  </script>
+</body>
+
+</html>
